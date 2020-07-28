@@ -1,6 +1,6 @@
 {
   "name": "image-preview-vue",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "private": false,
   "description": "a images viewer for vue.js / 基于Vue.js的图片预览查看器 编程式使用",
   "main": "lib/imagepreviewvue.umd.min.js",
@@ -47,8 +47,7 @@
   },
   "browserslist": [
     "> 1%",
-    "last 2 versions",
-    "not dead"
+    "last 2 versions"
   ],
   "gitHooks": {
     "pre-commit": "lint-staged"

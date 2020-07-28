@@ -38,7 +38,7 @@ export default {
       } catch (e) {
         alert('JSON解析失败')
       }
-      this.$previewImage(config)
+      this.$imagePreivew(config)
     }
   }
 }

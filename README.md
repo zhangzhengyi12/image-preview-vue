@@ -18,15 +18,17 @@
 
 ```js
 // main.js
-import imagePreivew from 'image-preview-vue'
-Vue.use(imagePreivew)
+import imagePreview from 'image-preview-vue'
+import 'image-preview-vue/lib/imagepreviewvue.css'
+
+Vue.use(imagePreview)
 
 // your some.vue
 export default {
   // ...
   methods:{
     foo(){
-      this.$previewImage({
+    const preview = this.$imagePreview({
         initIndex:0,
         images:['https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200229004202.jpg'],
       })
@@ -38,9 +40,13 @@ export default {
 **import**
 
 ```js
-import imagePreivew from 'image-preview-vue'
+// main.js
+import 'image-preview-vue/lib/imagepreviewvue.css'
 
-imagePreview({
+// other.js
+import imagePreview from 'image-preview-vue'
+
+const preview = imagePreview({
   initIndex:0,
   images:['https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200229004202.jpg'],
 })
@@ -52,6 +58,8 @@ imagePreview({
 - [X] 高斯模糊背景
 - [X] 图片预加载
 - [X] 分页信息显示
+- [] 优化初始缩放
+- [] 增加实例方法与回调
 
 ## Config
 
