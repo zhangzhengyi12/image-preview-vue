@@ -6,11 +6,11 @@ const defaultOptions = {
   initIndex: 0,
   images: [],
   isEnableBlurBackground: false,
-  isEnableLoopToggle: false,
+  isEnableLoopToggle: true,
   initViewMode: 'contain', // contain / cover / halfScreen
   shirnkAndEnlargeDeltaRatio: 0.2,
   wheelScrollDeltaRatio: 1,
-  isEnableImagePageIndicator: false
+  isEnableImagePageIndicator: true
 }
 
 const ImagePreviewCtor = Vue.extend(ImagePreview)

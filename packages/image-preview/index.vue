@@ -90,6 +90,7 @@
 
 <script>
 import WheelScaleHanlder from './WheelScaleHandler'
+import ImagePreloader from './imagePreloader'
 
 const ACTIONSTATE = {
   ROTATE: 1,
@@ -181,6 +182,10 @@ export default {
         options.wheelScrollDeltaRatio,
         this.handleWheelScrollChange
       )
+      this.ImagePreloader = new ImagePreloader(
+        options.images,
+        options.initIndex
+      )
       this.core.index = (() => {
         if (options.initIndex < 0) {
           return 0
@@ -204,10 +209,12 @@ export default {
     togglePrev() {
       this.core.index--
       this.resetActionStyle()
+      this.ImagePreloader.updateIndex(this.currentIndex)
     },
     toggleNext() {
       this.core.index++
       this.resetActionStyle()
+      this.ImagePreloader.updateIndex(this.currentIndex)
     },
     close() {
       this.visible = false
@@ -237,6 +244,7 @@ export default {
       this.$nextTick(() => {
         this.core.cacheBlurImageUrl = this.currentImageSrc
       })
+      this.ImagePreloader.onSomeImageUploaded()
     },
     handleTapClose() {
       this.close()
@@ -325,11 +333,11 @@ $action-font-color: #333;
     position: fixed;
     z-index: 999;
     object-fit: fill;
-    top: -50px;
-    left: -50px;
-    right: -50px;
-    bottom: -50px;
-    filter: blur(50px);
+    top: -120px;
+    left: -120px;
+    right: -120px;
+    bottom: -120px;
+    filter: blur(50px) brightness(1.2);
     background-color: #fff;
   }
 

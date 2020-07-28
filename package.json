@@ -1,6 +1,6 @@
 {
   "name": "image-preview-vue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": false,
   "description": "a images viewer for vue.js / 基于Vue.js的图片预览查看器 编程式使用",
   "main": "lib/imagepreviewvue.umd.min.js",
@@ -8,7 +8,7 @@
   "scripts": {
     "example:serve": "vue-cli-service serve",
     "example:build": "vue-cli-service build",
-    "example:publish": "bash ./publish-example.sh",
+    "example:publish": "bash publish-example.sh",
     "lint": "vue-cli-service lint",
     "lib:build": "vue-cli-service build --target lib --name imagepreviewvue --dest lib packages/index.js"
   },
