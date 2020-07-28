@@ -8,6 +8,7 @@
   "scripts": {
     "example:serve": "vue-cli-service serve",
     "example:build": "vue-cli-service build",
+    "example:publish": "bash ./publish-example.sh",
     "lint": "vue-cli-service lint",
     "lib:build": "vue-cli-service build --target lib --name imagepreviewvue --dest lib packages/index.js"
   },
