@@ -12,8 +12,6 @@
 
 ## Install
 
-**STEP1**
-
 > npm i image-preview-vue --save
 
 **global**
