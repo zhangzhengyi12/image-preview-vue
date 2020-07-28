@@ -1,0 +1,72 @@
+{
+  "id": "1969228",
+  "name": "image-preivew",
+  "font_family": "zip",
+  "css_prefix_text": "zip",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5831339",
+      "name": "逆时针旋转",
+      "font_class": "nishizhenxuanzhuan",
+      "unicode": "e65a",
+      "unicode_decimal": 58970
+    },
+    {
+      "icon_id": "5831342",
+      "name": "顺时针旋转",
+      "font_class": "shunshizhenxuanzhuan",
+      "unicode": "e65c",
+      "unicode_decimal": 58972
+    },
+    {
+      "icon_id": "879141",
+      "name": "prev",
+      "font_class": "prev",
+      "unicode": "e659",
+      "unicode_decimal": 58969
+    },
+    {
+      "icon_id": "879157",
+      "name": "next",
+      "font_class": "next",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "924844",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
+      "icon_id": "3546178",
+      "name": "缩小",
+      "font_class": "suoxiao",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "3546180",
+      "name": "放大",
+      "font_class": "fangda",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "4922583",
+      "name": "全屏",
+      "font_class": "full_screen",
+      "unicode": "e673",
+      "unicode_decimal": 58995
+    },
+    {
+      "icon_id": "4922585",
+      "name": "适应屏幕",
+      "font_class": "adapt",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    }
+  ]
+}
