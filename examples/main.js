@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import ImagePreivew from '../packages/index'
-import imagePreivew from '../packages/image-preview'
+import imagePreivew from '../packages/index'
 
 Vue.config.productionTip = false
 

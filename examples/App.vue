@@ -23,9 +23,11 @@ export default {
   "isEnableBlurBackground": false,
   "isEnableLoopToggle": true,
   "initViewMode": "contain",
+  "containScale": 1,
   "shirnkAndEnlargeDeltaRatio": 0.2,
   "wheelScrollDeltaRatio": 1,
-  "isEnableImagePageIndicator": true
+  "isEnableImagePageIndicator": true,
+  "maskBackgroundColor": "rgba(0,0,0,0.6)"
 }
       `
     }
@@ -38,7 +40,10 @@ export default {
       } catch (e) {
         alert('JSON解析失败')
       }
-      this.$imagePreivew(config)
+      config.onClose = () => {
+        console.log('preview has been closed')
+      }
+      const preview = this.$imagePreview(config)
     }
   }
 }

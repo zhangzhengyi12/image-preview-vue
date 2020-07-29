@@ -58,8 +58,8 @@ const preview = imagePreview({
 - [X] 高斯模糊背景
 - [X] 图片预加载
 - [X] 分页信息显示
-- [] 优化初始缩放
-- [] 增加实例方法与回调
+- [X] 自定义contain缩放
+- [X] 增加实例方法与回调
 
 ## Config
 
@@ -68,11 +68,34 @@ const preview = imagePreview({
 | initIndex | Number | 初始化展示图片索引 | - | 0 |
 | images | [String] | 图片URL数组 | - | [] |
 | isEnableBlurBackground | Boolean | 是否开启高斯模糊背景 | - | false |
+| maskBackgroundColor | String | 半透明遮罩层背景色 只生效于关闭高斯模糊的情况 | 任何合法的css background-color值 | 'rgba(0,0,0,0.4)' |
 | isEnableLoopToggle | Boolean | 是否开启循环切换模式 | - | true |
 | initViewMode | String | 初始化图片展示模式(等于与Object-fit) | 'contain'/'cover' | 'contain' |
+| containScale | Number | contain模式下的缩放比例，只在contain模式下生效 | [0.3,5] | 1 |
 | shirnkAndEnlargeDeltaRatio | Number | 缩放点击强度系数 | - | 0.2 |
 | wheelScrollDeltaRatio | Number | 鼠标滚轮缩放图片强度系数 | - | 1 |
 | isEnableImagePageIndicator | Boolean | 是否显示分页 | - | true |
+| onClose | Function | 关闭回调 | - | ()=>{} |
+
+**viewMode**
+
+内置两个基本模式 `contain` 和 `cover`
+
+对应下方全屏切换按钮
+
+- contain 默认单轴撑满屏幕 维持比例不裁切，如果希望整体缩小，可以修改 containScale 参数
+- cover 默认双轴撑满屏幕 维持比例，长轴裁切。
+
+## instance
+
+**get instance**
+
+> const preview = this.$imagePreview({...})
+
+| 方法名 | 参数 | 描述 |
+| ----------- | ----------- | ----------- |
+| close | - | 关闭预览 |
+
 ## Contributing
 
 如果有发现bug或者希望加入一些功能，请积极提issues，我会尽快回复

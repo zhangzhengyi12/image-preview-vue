@@ -1,6 +1,6 @@
 <template>
   <transition name="preview-anima">
-    <div class="image-preview" v-show="visible">
+    <div class="image-preview" :style="`background-color:${config.facade.maskBackgroundColor}`" v-show="visible">
       <!-- 高斯模糊层 -->
       <div
         class="image-preview__blur-layer"
@@ -121,13 +121,15 @@ export default {
       },
       config: {
         facade: {
-          isEnableBlurBackground: false
+          isEnableBlurBackground: false,
+          maskBackgroundColor:'rgba(0,0,0,.4)'
         },
         feature: {
           isEnableLoopToggle: false,
           isEnableImagePageIndicator: true,
           wheelScrollDeltaRatio: 1,
-          shirnkAndEnlargeDelta: 0.2
+          shirnkAndEnlargeDelta: 0.2,
+          containScale: 1
         }
       }
     }
@@ -186,6 +188,7 @@ export default {
         options.images,
         options.initIndex
       )
+
       this.core.index = (() => {
         if (options.initIndex < 0) {
           return 0
@@ -195,7 +198,6 @@ export default {
           return options.initIndex
         }
       })()
-
       this.core.images = options.images
       this.config.facade.isEnableBlurBackground = options.isEnableBlurBackground
       this.config.feature.isEnableLoopToggle = options.isEnableLoopToggle
@@ -205,6 +207,10 @@ export default {
         options.initViewMode === 'contain' ? false : true
       this.config.feature.shirnkAndEnlargeDeltaRatio =
         options.shirnkAndEnlargeDeltaRatio
+      this.config.feature.containScale = options.containScale
+      this.config.facade.maskBackgroundColor = options.maskBackgroundColor
+
+      this.resetActionStyle()
     },
     togglePrev() {
       this.core.index--
@@ -219,6 +225,7 @@ export default {
     close() {
       this.visible = false
       setTimeout(() => {
+        this.$emit('close')
         this.$destroy()
         this.$el.parentNode.removeChild(this.$el)
       }, 300)
@@ -232,10 +239,16 @@ export default {
         this.core.scaleRatio = ratio
       }
     },
+    // 重置清空用户的操作 切换图片 OR 切换显示模式
     resetActionStyle() {
       this.core.scaleRatio = 1
       this.drag.transformX = 0
       this.drag.transformY = 0
+
+      if (!this.core.fullscreenMode) {
+        // contain mode
+        this.setScaleRatio(this.config.feature.containScale)
+      }
     },
     /**
      * MARK: Handler
@@ -264,8 +277,8 @@ export default {
       this.core.imageRotate += 90
     },
     handleTapfullscreen() {
-      this.resetActionStyle()
       this.core.fullscreenMode = !this.core.fullscreenMode
+      this.resetActionStyle()
     },
     handleWheelScrollChange(ratioDelta) {
       this.core.actionState = ACTIONSTATE.SCALE
@@ -322,7 +335,6 @@ $action-font-color: #333;
   top: 0;
   bottom: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.5);
   z-index: 998;
 
   &--blur-mode {
