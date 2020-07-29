@@ -20,7 +20,7 @@ export default {
     "https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200728222300.png",
     "https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200728225458.png"
   ],
-  "isEnableBlurBackground": false,
+  "isEnableBlurBackground": true,
   "isEnableLoopToggle": true,
   "initViewMode": "contain",
   "containScale": 1,
