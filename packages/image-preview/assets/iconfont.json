@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "14421289",
+      "name": "左右翻转",
+      "font_class": "zuoyoufanzhuan_huaban1",
+      "unicode": "e65f",
+      "unicode_decimal": 58975
+    },
+    {
+      "icon_id": "14421299",
+      "name": "垂直翻转",
+      "font_class": "chuizhifanzhuan_huaban1",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
       "icon_id": "5831339",
       "name": "逆时针旋转",
       "font_class": "nishizhenxuanzhuan",

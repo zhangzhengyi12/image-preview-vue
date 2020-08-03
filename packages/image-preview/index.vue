@@ -1,6 +1,10 @@
 <template>
   <transition name="preview-anima">
-    <div class="image-preview" :style="`background-color:${config.facade.maskBackgroundColor}`" v-show="visible">
+    <div
+      class="image-preview"
+      :style="`background-color:${config.facade.maskBackgroundColor}`"
+      v-show="visible"
+    >
       <!-- 高斯模糊层 -->
       <div
         class="image-preview__blur-layer"
@@ -27,10 +31,12 @@
           v-if="config.feature.isEnableImagePageIndicator"
           class="image-preview__page-info"
         >{{currentIndex + 1}}/{{core.images.length}}</div>
+
         <!-- 关闭按钮 -->
         <div class="image-preview__close image-preview__cir-action" @click="handleTapClose">
           <i class="zip zipclose"></i>
         </div>
+
         <!-- 图片切换 -->
         <div
           v-if="hasPrevImage"
@@ -46,6 +52,7 @@
         >
           <i class="zip zipnext"></i>
         </div>
+
         <!-- 下方操作栏 -->
         <div class="image-preview__action-bar">
           <!-- 旋转 -->
@@ -82,6 +89,15 @@
           >
             <i class="zip zipsuoxiao"></i>
           </div>
+          <!-- 水平镜像切换 -->
+          <div
+            :class="['image-preview__horizontal-toggle','action-btn','image-preview__cir-action',{
+              'is-active':core.isEnableHorizontalMirror
+            }]"
+            @click="handleTapHorizontalToggle"
+          >
+            <i class="zip zipzuoyoufanzhuan_huaban1"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -91,6 +107,12 @@
 <script>
 import WheelScaleHanlder from './WheelScaleHandler'
 import ImagePreloader from './imagePreloader'
+import {
+  covertMatrixToCSSMatrix,
+  rotateMatrixGenrator,
+  genBaseMatrix,
+  matrixMultiplication
+} from './matrix.js'
 
 const ACTIONSTATE = {
   ROTATE: 1,
@@ -110,7 +132,8 @@ export default {
         imageRotate: 0,
         fullscreenMode: false,
         scaleRatio: 1,
-        actionState: ACTIONSTATE.ROTATE
+        actionState: ACTIONSTATE.ROTATE,
+        isEnableHorizontalMirror: false
       },
       drag: {
         onDrag: false,
@@ -122,7 +145,7 @@ export default {
       config: {
         facade: {
           isEnableBlurBackground: false,
-          maskBackgroundColor:'rgba(0,0,0,.4)'
+          maskBackgroundColor: 'rgba(0,0,0,.4)'
         },
         feature: {
           isEnableLoopToggle: false,
@@ -162,11 +185,21 @@ export default {
     currentImageSrc() {
       return this.core.images[this.currentIndex]
     },
+    mirrorStyle() {
+      let matrix = genBaseMatrix()
+      // 暂时关闭垂直镜像 本身能够被旋转代替 并且会导致万向节死锁问题
+      if (this.core.isEnableHorizontalMirror) {
+        // 开启水平镜像 Y轴旋转180度
+        matrix = matrixMultiplication(matrix, rotateMatrixGenrator('y', 180))
+      }
+      return covertMatrixToCSSMatrix(matrix)
+    },
     imageStyle() {
       const roateStyle = `rotate(${this.core.imageRotate}deg)`
       const scaleStyle = `scale(${this.core.scaleRatio})`
       const translateStyle = `translate(${this.drag.transformX}px,${this.drag.transformY}px)`
-      const transformStyle = `transform:${translateStyle} ${roateStyle} ${scaleStyle} ;`
+      const mirrorStyle = this.mirrorStyle
+      const transformStyle = `transform:${translateStyle} ${roateStyle} ${scaleStyle} ${mirrorStyle};`
 
       const fullscreenStyle = `object-fit: ${
         this.core.fullscreenMode ? 'cover' : 'contain;'
@@ -296,6 +329,10 @@ export default {
         this.core.scaleRatio + this.config.feature.shirnkAndEnlargeDeltaRatio
       )
     },
+    handleTapHorizontalToggle() {
+      this.core.actionState = ACTIONSTATE.ROTATE
+      this.core.isEnableHorizontalMirror = !this.core.isEnableHorizontalMirror
+    },
     handleImageDragStart(e) {
       this.drag.onDrag = true
       this.drag.lastPageX = e.pageX
@@ -326,8 +363,10 @@ export default {
 // variable
 
 $action-bg-color: rgba(255, 255, 255, 0.4);
-$action-bg-color-hover: rgba(255, 255, 255, 0.6);
+$action-bg-color-hover: rgba(255, 255, 255, 0.7);
 $action-font-color: #333;
+$action-bg-active-color: rgba(255, 255, 255, 0.7);
+$action-font-active-color: #000;
 
 .image-preview {
   position: fixed;
@@ -472,6 +511,11 @@ $action-font-color: #333;
 
   .zip {
     font-size: 22px;
+  }
+
+  &.is-active {
+    color: $action-font-active-color;
+    background-color: $action-bg-active-color;
   }
 }
 

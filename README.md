@@ -60,6 +60,7 @@ const preview = imagePreview({
 - [X] 分页信息显示
 - [X] 自定义contain缩放
 - [X] 增加实例方法与回调
+- [X] 增加图片水平镜像功能
 
 ## Config
 
