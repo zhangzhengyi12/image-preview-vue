@@ -72,7 +72,7 @@ const preview = imagePreview({
 | maskBackgroundColor | String | 半透明遮罩层背景色 只生效于关闭高斯模糊的情况 | 任何合法的css background-color值 | 'rgba(0,0,0,0.4)' |
 | isEnableLoopToggle | Boolean | 是否开启循环切换模式 | - | true |
 | initViewMode | String | 初始化图片展示模式(等于与Object-fit) | 'contain'/'cover' | 'contain' |
-| containScale | Number | contain模式下的缩放比例，只在contain模式下生效 | [0.3,5] | 1 |
+| containScale | Number | contain模式下的缩放比例，只在contain模式下生效 | 合法区间 [0.1,5] | 1 |
 | shirnkAndEnlargeDeltaRatio | Number | 缩放点击强度系数 | - | 0.2 |
 | wheelScrollDeltaRatio | Number | 鼠标滚轮缩放图片强度系数 | - | 1 |
 | isEnableImagePageIndicator | Boolean | 是否显示分页 | - | true |

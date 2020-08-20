@@ -266,8 +266,8 @@ export default {
       }, 300)
     },
     setScaleRatio(ratio) {
-      if (ratio < 0.3) {
-        this.core.scaleRatio = 0.3
+      if (ratio < 0.1) {
+        this.core.scaleRatio = 0.1
       } else if (ratio > 5) {
         this.core.scaleRatio = 5
       } else {
