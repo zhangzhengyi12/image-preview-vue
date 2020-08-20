@@ -13,6 +13,10 @@
     "lib:build": "vue-cli-service build --target lib --name imagepreviewvue --dest lib packages/index.js",
     "all:publish": "npm run example:publish && npm run lib:build && npm publish"
   },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/zhangzhengyi12/image-preview-vue"
+  },
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
