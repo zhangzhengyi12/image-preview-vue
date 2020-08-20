@@ -15,7 +15,8 @@ const defaultOptions = {
   wheelScrollDeltaRatio: 1,
   isEnableImagePageIndicator: true,
   maskBackgroundColor:'rgba(0,0,0,0.4)',
-  onClose: noop
+  onClose: noop,
+  zIndex:100
 }
 
 const ImagePreviewCtor = Vue.extend(ImagePreview)

@@ -27,7 +27,8 @@ export default {
   "shirnkAndEnlargeDeltaRatio": 0.2,
   "wheelScrollDeltaRatio": 1,
   "isEnableImagePageIndicator": true,
-  "maskBackgroundColor": "rgba(0,0,0,0.6)"
+  "maskBackgroundColor": "rgba(0,0,0,0.6)",
+  "zIndex":4000
 }
       `
     }

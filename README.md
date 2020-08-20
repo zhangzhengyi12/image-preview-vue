@@ -77,6 +77,7 @@ const preview = imagePreview({
 | wheelScrollDeltaRatio | Number | 鼠标滚轮缩放图片强度系数 | - | 1 |
 | isEnableImagePageIndicator | Boolean | 是否显示分页 | - | true |
 | onClose | Function | 关闭回调 | - | ()=>{} |
+| zIndex | Number | 预览弹窗的 z-index 值 | - | 100 |
 
 **viewMode**
 

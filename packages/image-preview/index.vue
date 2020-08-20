@@ -2,7 +2,7 @@
   <transition name="preview-anima">
     <div
       class="image-preview"
-      :style="`background-color:${config.facade.maskBackgroundColor}`"
+      :style="`background-color:${config.facade.maskBackgroundColor};z-index:${config.facade.zIndex}`"
       v-show="visible"
     >
       <!-- 高斯模糊层 -->
@@ -145,7 +145,8 @@ export default {
       config: {
         facade: {
           isEnableBlurBackground: false,
-          maskBackgroundColor: 'rgba(0,0,0,.4)'
+          maskBackgroundColor: 'rgba(0,0,0,.4)',
+          zIndex: 100,
         },
         feature: {
           isEnableLoopToggle: false,
@@ -242,6 +243,7 @@ export default {
         options.shirnkAndEnlargeDeltaRatio
       this.config.feature.containScale = options.containScale
       this.config.facade.maskBackgroundColor = options.maskBackgroundColor
+      this.config.facade.zIndex = options.zIndex
 
       this.resetActionStyle()
     },
@@ -374,7 +376,6 @@ $action-font-active-color: #000;
   top: 0;
   bottom: 0;
   right: 0;
-  z-index: 998;
 
   &--blur-mode {
     background: white;
