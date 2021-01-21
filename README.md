@@ -61,6 +61,7 @@ const preview = imagePreview({
 - [X] 自定义contain缩放
 - [X] 增加实例方法与回调
 - [X] 增加图片水平镜像功能
+- [X] 增加常用快捷键
 
 ## Config
 
@@ -78,6 +79,7 @@ const preview = imagePreview({
 | isEnableImagePageIndicator | Boolean | 是否显示分页 | - | true |
 | onClose | Function | 关闭回调 | - | ()=>{} |
 | zIndex | Number | 预览弹窗的 z-index 值 | - | 100 |
+| isEnableKeyboardShortcuts | Boolean | 是否开启常用快捷键 | - |  false |
 
 **viewMode**
 
@@ -87,6 +89,14 @@ const preview = imagePreview({
 
 - contain 默认单轴撑满屏幕 维持比例不裁切，如果希望整体缩小，可以修改 containScale 参数
 - cover 默认双轴撑满屏幕 维持比例，长轴裁切。
+
+**快捷键 shortcuts**
+
+- Esc 关闭
+- UP 放大
+- Down 缩小
+- Left 向左切换
+- Right 向右切换
 
 ## instance
 

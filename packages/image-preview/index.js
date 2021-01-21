@@ -14,9 +14,10 @@ const defaultOptions = {
   shirnkAndEnlargeDeltaRatio: 0.2,
   wheelScrollDeltaRatio: 1,
   isEnableImagePageIndicator: true,
-  maskBackgroundColor:'rgba(0,0,0,0.4)',
+  maskBackgroundColor: 'rgba(0,0,0,0.4)',
   onClose: noop,
-  zIndex:100
+  zIndex: 100,
+  isEnableKeyboardShortcuts: true
 }
 
 const ImagePreviewCtor = Vue.extend(ImagePreview)

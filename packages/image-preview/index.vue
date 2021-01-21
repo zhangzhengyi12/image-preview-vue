@@ -122,7 +122,7 @@ const ACTIONSTATE = {
 
 export default {
   name: 'zzy-image-preview',
-  data() {
+  data () {
     return {
       visible: false,
       core: {
@@ -159,7 +159,7 @@ export default {
     }
   },
   computed: {
-    imageStateClassName() {
+    imageStateClassName () {
       if (this.core.actionState === ACTIONSTATE.ROTATE) {
         return 'is-rotate'
       } else if (this.core.actionState === ACTIONSTATE.SCALE) {
@@ -168,25 +168,25 @@ export default {
         return 'is-drag'
       }
     },
-    currentIndex() {
+    currentIndex () {
       if (this.config.feature.isEnableLoopToggle) {
         return Math.abs(this.core.index) % this.core.images.length
       } else {
         return this.core.index
       }
     },
-    hasPrevImage() {
+    hasPrevImage () {
       if (this.config.feature.isEnableLoopToggle) return true
       return !!this.core.images[this.currentIndex - 1]
     },
-    hasNextImage() {
+    hasNextImage () {
       if (this.config.feature.isEnableLoopToggle) return true
       return !!this.core.images[this.currentIndex + 1]
     },
-    currentImageSrc() {
+    currentImageSrc () {
       return this.core.images[this.currentIndex]
     },
-    mirrorStyle() {
+    mirrorStyle () {
       let matrix = genBaseMatrix()
       // 暂时关闭垂直镜像 本身能够被旋转代替 并且会导致万向节死锁问题
       if (this.core.isEnableHorizontalMirror) {
@@ -195,25 +195,24 @@ export default {
       }
       return covertMatrixToCSSMatrix(matrix)
     },
-    imageStyle() {
+    imageStyle () {
       const roateStyle = `rotate(${this.core.imageRotate}deg)`
       const scaleStyle = `scale(${this.core.scaleRatio})`
       const translateStyle = `translate(${this.drag.transformX}px,${this.drag.transformY}px)`
       const mirrorStyle = this.mirrorStyle
       const transformStyle = `transform:${translateStyle} ${roateStyle} ${scaleStyle} ${mirrorStyle};`
 
-      const fullscreenStyle = `object-fit: ${
-        this.core.fullscreenMode ? 'cover' : 'contain;'
-      };`
+      const fullscreenStyle = `object-fit: ${this.core.fullscreenMode ? 'cover' : 'contain;'
+        };`
 
       return transformStyle + fullscreenStyle
     }
   },
-  mounted() {
+  mounted () {
     this.visible = true
   },
   methods: {
-    initWithOptions(options) {
+    initWithOptions (options) {
       this.WheelScaleHandler = new WheelScaleHanlder(
         options.wheelScrollDeltaRatio,
         this.handleWheelScrollChange
@@ -245,27 +244,45 @@ export default {
       this.config.facade.maskBackgroundColor = options.maskBackgroundColor
       this.config.facade.zIndex = options.zIndex
 
+      if (options.isEnableKeyboardShortcuts) {
+        this.bindKeyboardShortcuts()
+      }
+
       this.resetActionStyle()
     },
-    togglePrev() {
+    bindKeyboardShortcuts () {
+      window.addEventListener('keydown', this.onKeyboardKeyDown)
+    },
+    unbindKeyboardShortcuts () {
+      window.removeEventListener('keydown', this.onKeyboardKeyDown)
+    },
+    onKeyboardKeyDown ({ code }) {
+      if (code === 'ArrowRight') this.toggleNext()
+      if (code === 'ArrowLeft') this.togglePrev()
+      if (code === 'Escape') this.handleTapClose()
+      if (code === 'ArrowUp') this.handleTapEnlarge()
+      if (code === 'ArrowDown') this.handleTapShrink()
+    },
+    togglePrev () {
       this.core.index--
       this.resetActionStyle()
       this.ImagePreloader.updateIndex(this.currentIndex)
     },
-    toggleNext() {
+    toggleNext () {
       this.core.index++
       this.resetActionStyle()
       this.ImagePreloader.updateIndex(this.currentIndex)
     },
-    close() {
+    close () {
       this.visible = false
+      this.unbindKeyboardShortcuts()
       setTimeout(() => {
         this.$emit('close')
         this.$destroy()
         this.$el.parentNode.removeChild(this.$el)
       }, 300)
     },
-    setScaleRatio(ratio) {
+    setScaleRatio (ratio) {
       if (ratio < 0.1) {
         this.core.scaleRatio = 0.1
       } else if (ratio > 5) {
@@ -275,7 +292,7 @@ export default {
       }
     },
     // 重置清空用户的操作 切换图片 OR 切换显示模式
-    resetActionStyle() {
+    resetActionStyle () {
       this.core.scaleRatio = 1
       this.drag.transformX = 0
       this.drag.transformY = 0
@@ -288,59 +305,59 @@ export default {
     /**
      * MARK: Handler
      */
-    handleImageLoaded(e) {
+    handleImageLoaded (e) {
       this.$nextTick(() => {
         this.core.cacheBlurImageUrl = this.currentImageSrc
       })
       this.ImagePreloader.onSomeImageUploaded()
     },
-    handleTapClose() {
+    handleTapClose () {
       this.close()
     },
-    handleTapPrev() {
+    handleTapPrev () {
       this.togglePrev()
     },
-    handleTapNext() {
+    handleTapNext () {
       this.toggleNext()
     },
-    handleTapRotateLeft() {
+    handleTapRotateLeft () {
       this.core.actionState = ACTIONSTATE.ROTATE
       this.core.imageRotate -= 90
     },
-    handleTapRotateRight() {
+    handleTapRotateRight () {
       this.core.actionState = ACTIONSTATE.ROTATE
       this.core.imageRotate += 90
     },
-    handleTapfullscreen() {
+    handleTapfullscreen () {
       this.core.fullscreenMode = !this.core.fullscreenMode
       this.resetActionStyle()
     },
-    handleWheelScrollChange(ratioDelta) {
+    handleWheelScrollChange (ratioDelta) {
       this.core.actionState = ACTIONSTATE.SCALE
       this.setScaleRatio(this.core.scaleRatio - ratioDelta)
     },
-    handleTapShrink() {
+    handleTapShrink () {
       this.core.actionState = ACTIONSTATE.ROTATE
       this.setScaleRatio(
         this.core.scaleRatio - this.config.feature.shirnkAndEnlargeDeltaRatio
       )
     },
-    handleTapEnlarge() {
+    handleTapEnlarge () {
       this.core.actionState = ACTIONSTATE.ROTATE
       this.setScaleRatio(
         this.core.scaleRatio + this.config.feature.shirnkAndEnlargeDeltaRatio
       )
     },
-    handleTapHorizontalToggle() {
+    handleTapHorizontalToggle () {
       this.core.actionState = ACTIONSTATE.ROTATE
       this.core.isEnableHorizontalMirror = !this.core.isEnableHorizontalMirror
     },
-    handleImageDragStart(e) {
+    handleImageDragStart (e) {
       this.drag.onDrag = true
       this.drag.lastPageX = e.pageX
       this.drag.lastPageY = e.pageY
     },
-    handleImageDragMove(e) {
+    handleImageDragMove (e) {
       if (!this.drag.onDrag) return
 
       this.core.actionState = ACTIONSTATE.DRAG
@@ -353,7 +370,7 @@ export default {
       this.drag.lastPageX = e.pageX
       this.drag.lastPageY = e.pageY
     },
-    handleImageDragEnd(e) {
+    handleImageDragEnd (e) {
       this.drag.onDrag = false
       this.core.actionState = ACTIONSTATE.ROTATE
     }
