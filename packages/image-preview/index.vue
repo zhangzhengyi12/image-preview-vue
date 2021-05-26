@@ -353,6 +353,8 @@ export default {
       this.core.isEnableHorizontalMirror = !this.core.isEnableHorizontalMirror
     },
     handleImageDragStart (e) {
+      console.log(e.button)
+      if (e.button !== 0) return
       this.drag.onDrag = true
       this.drag.lastPageX = e.pageX
       this.drag.lastPageY = e.pageY

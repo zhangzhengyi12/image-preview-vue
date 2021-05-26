@@ -15,17 +15,14 @@ export default {
 {
   "initIndex": 0,
   "images": [
-    "https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200728221752.png",
-    "https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200229004202.jpg",
-    "https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200728222300.png",
-    "https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200728225458.png"
+    "https://yinodimage.oss-cn-hangzhou.aliyuncs.com/20200728221752.png"
   ],
-  "isEnableBlurBackground": true,
+  "isEnableBlurBackground": false,
   "isEnableLoopToggle": true,
   "initViewMode": "contain",
   "containScale": 1,
   "shirnkAndEnlargeDeltaRatio": 0.2,
-  "wheelScrollDeltaRatio": 1,
+  "wheelScrollDeltaRatio": 0.2,
   "isEnableImagePageIndicator": true,
   "maskBackgroundColor": "rgba(0,0,0,0.6)",
   "zIndex":4000

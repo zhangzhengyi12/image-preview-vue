@@ -62,6 +62,7 @@ const preview = imagePreview({
 - [X] 增加实例方法与回调
 - [X] 增加图片水平镜像功能
 - [X] 增加常用快捷键
+- [] 增加图片切换预览
 
 ## Config
 
@@ -75,7 +76,7 @@ const preview = imagePreview({
 | initViewMode | String | 初始化图片展示模式(等于与Object-fit) | 'contain'/'cover' | 'contain' |
 | containScale | Number | contain模式下的缩放比例，只在contain模式下生效 | 合法区间 [0.1,5] | 1 |
 | shirnkAndEnlargeDeltaRatio | Number | 缩放点击强度系数 | - | 0.2 |
-| wheelScrollDeltaRatio | Number | 鼠标滚轮缩放图片强度系数 | - | 1 |
+| wheelScrollDeltaRatio | Number | 鼠标滚轮缩放图片强度系数 | - | 0.2 |
 | isEnableImagePageIndicator | Boolean | 是否显示分页 | - | true |
 | onClose | Function | 关闭回调 | - | ()=>{} |
 | zIndex | Number | 预览弹窗的 z-index 值 | - | 100 |

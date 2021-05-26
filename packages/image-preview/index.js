@@ -12,7 +12,7 @@ const defaultOptions = {
   initViewMode: 'contain', // contain / cover / halfScreen
   containScale: 1,
   shirnkAndEnlargeDeltaRatio: 0.2,
-  wheelScrollDeltaRatio: 1,
+  wheelScrollDeltaRatio: 0.2,
   isEnableImagePageIndicator: true,
   maskBackgroundColor: 'rgba(0,0,0,0.4)',
   onClose: noop,
