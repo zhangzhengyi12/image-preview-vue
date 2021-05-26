@@ -1,11 +1,9 @@
-import { trottle } from '../utils/trottle'
-
 export default class WheelScaleHandler {
   constructor(deltaRatio, changeCallback) {
     this.deltaRatio = deltaRatio
     this.changeCallback = changeCallback
 
-    // 防抖
+    // 防抖 延迟对操作有一定影响，所以暂时关闭
     // this.wheelScrollHanlder = trottle(this.wheelScrollHanlder, 20)
 
     // 绑定this

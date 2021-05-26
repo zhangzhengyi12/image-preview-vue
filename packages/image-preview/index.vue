@@ -114,10 +114,11 @@ import {
   matrixMultiplication
 } from './matrix.js'
 
+// 用户操作状态 对应不同动画
 const ACTIONSTATE = {
-  ROTATE: 1,
-  SCALE: 2,
-  DRAG: 3
+  ROTATE: 1, // 旋转
+  SCALE: 2, // 缩放
+  DRAG: 3 // 拖拽
 }
 
 export default {
@@ -353,7 +354,6 @@ export default {
       this.core.isEnableHorizontalMirror = !this.core.isEnableHorizontalMirror
     },
     handleImageDragStart (e) {
-      console.log(e.button)
       if (e.button !== 0) return
       this.drag.onDrag = true
       this.drag.lastPageX = e.pageX
