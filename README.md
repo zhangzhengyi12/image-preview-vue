@@ -62,7 +62,7 @@ const preview = imagePreview({
 - [X] 增加实例方法与回调
 - [X] 增加图片水平镜像功能
 - [X] 增加常用快捷键
-- [] 增加图片切换预览
+- [X] 增加图片下载功能
 
 ## Config
 
@@ -81,6 +81,8 @@ const preview = imagePreview({
 | onClose | Function | 关闭回调 | - | ()=>{} |
 | zIndex | Number | 预览弹窗的 z-index 值 | - | 100 |
 | isEnableKeyboardShortcuts | Boolean | 是否开启常用快捷键 | - |  false |
+| isEnableDownloadImage | Boolean | 是否开启图片下载功能(注意!!!!因为浏览器限制，请务必确保图片支持跨域访问!!!!!) | - |  true |
+| getImageFileName | Function | 下载时图片的文件名获取函数,可以自己实现正则来获取文件名，默认是时间戳 | - |  (url) =>  String(Date.now()) |
 
 **viewMode**
 
@@ -98,6 +100,7 @@ const preview = imagePreview({
 - Down 缩小
 - Left 向左切换
 - Right 向右切换
+- Ctrl + s 下载图片，开启图片下载功能下生效
 
 ## instance
 

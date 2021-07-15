@@ -17,7 +17,11 @@ const defaultOptions = {
   maskBackgroundColor: 'rgba(0,0,0,0.4)',
   onClose: noop,
   zIndex: 100,
-  isEnableKeyboardShortcuts: true
+  isEnableKeyboardShortcuts: true,
+  isEnableDownloadImage: true,
+  getImageFileName: () => {
+    return String(Date.now())
+  }
 }
 
 const ImagePreviewCtor = Vue.extend(ImagePreview)

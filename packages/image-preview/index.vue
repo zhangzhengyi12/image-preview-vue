@@ -98,6 +98,14 @@
           >
             <i class="zip zipzuoyoufanzhuan_huaban1"></i>
           </div>
+          <!--  -->
+          <div
+            v-if="config.feature.isEnableDownloadImage"
+            class="image-preview__full-scale-small action-btn image-preview__cir-action"
+            @click="handleTapDownload"
+          >
+            <i class="zip zipdown"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -107,6 +115,7 @@
 <script>
 import WheelScaleHanlder from './WheelScaleHandler'
 import ImagePreloader from './imagePreloader'
+import downloadImage from './downloadImage'
 import {
   covertMatrixToCSSMatrix,
   rotateMatrixGenrator,
@@ -154,7 +163,9 @@ export default {
           isEnableImagePageIndicator: true,
           wheelScrollDeltaRatio: 1,
           shirnkAndEnlargeDelta: 0.2,
-          containScale: 1
+          containScale: 1,
+          isEnableDownloadImage: false,
+          getImageFileName: () => { }
         }
       }
     }
@@ -237,6 +248,8 @@ export default {
       this.config.feature.isEnableLoopToggle = options.isEnableLoopToggle
       this.config.feature.isEnableImagePageIndicator =
         options.isEnableImagePageIndicator
+      this.config.feature.isEnableDownloadImage = options.isEnableDownloadImage
+      this.config.feature.getImageFileName = options.getImageFileName
       this.core.fullscreenMode =
         options.initViewMode === 'contain' ? false : true
       this.config.feature.shirnkAndEnlargeDeltaRatio =
@@ -257,12 +270,38 @@ export default {
     unbindKeyboardShortcuts () {
       window.removeEventListener('keydown', this.onKeyboardKeyDown)
     },
-    onKeyboardKeyDown ({ code }) {
-      if (code === 'ArrowRight') this.toggleNext()
-      if (code === 'ArrowLeft') this.togglePrev()
-      if (code === 'Escape') this.handleTapClose()
-      if (code === 'ArrowUp') this.handleTapEnlarge()
-      if (code === 'ArrowDown') this.handleTapShrink()
+    onKeyboardKeyDown (event) {
+      const { code, ctrlKey, metaKey } = event
+      if (code === 'ArrowRight') {
+        this.toggleNext()
+        event.preventDefault()
+        return
+      }
+      if (code === 'ArrowLeft') {
+        this.togglePrev()
+        event.preventDefault()
+        return
+      }
+      if (code === 'Escape') {
+        this.handleTapClose()
+        event.preventDefault()
+        return
+      }
+      if (code === 'ArrowUp') {
+        this.handleTapEnlarge()
+        event.preventDefault()
+        return
+      }
+      if (code === 'ArrowDown') {
+        this.handleTapShrink()
+        event.preventDefault()
+        return
+      }
+      if (code === 'KeyS' && (ctrlKey || metaKey) && this.config.feature.isEnableDownloadImage) {
+        this.handleTapDownload()
+        event.preventDefault()
+        return
+      }
     },
     togglePrev () {
       this.core.index--
@@ -342,6 +381,9 @@ export default {
       this.setScaleRatio(
         this.core.scaleRatio - this.config.feature.shirnkAndEnlargeDeltaRatio
       )
+    },
+    handleTapDownload () {
+      downloadImage(this.currentImageSrc, this.config.feature.getImageFileName)
     },
     handleTapEnlarge () {
       this.core.actionState = ACTIONSTATE.ROTATE

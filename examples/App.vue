@@ -25,7 +25,8 @@ export default {
   "wheelScrollDeltaRatio": 0.2,
   "isEnableImagePageIndicator": true,
   "maskBackgroundColor": "rgba(0,0,0,0.6)",
-  "zIndex":4000
+  "zIndex":4000,
+  "isEnableDownloadImage": true
 }
       `
     }
